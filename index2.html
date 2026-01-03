@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imóveis Direto</title>
+<style>
+  /* RESET PADRÃO */
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  a {
+    text-decoration: none;
+  }
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid #222;
+    padding: 30px 15px 20px 15px;
+    background: #000;
+  }
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .logo-box {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-box div {
+    position: absolute;
+  }
+  .logo-box .edificio {
+    width: 25px;
+    height: 15px;
+    background: white;
+    border-radius: 2px;
+    bottom: 10px;
+    left: 10px;
+  }
+  .logo-box .janela1 {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 1px;
+    top: 12px;
+    left: 18px;
+  }
+  .logo-box .janela2 {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 1px;
+    top: 12px;
+    left: 26px;
+  }
+  .social-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .social-icons img {
+    width: 28px;
+    height: 28px;
+  }
+  /* GRADE DE IMÓVEIS */
+  .grid-imoveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto 20px auto;
+    padding: 0 15px;
+  }
+  .imovel {
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .imovel img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  .imovel-preco {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .btn-facebook {
+    display: block;
+    background: #3b82f6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  /* BOTÃO FAQ */
+  .btn-faq {
+    display: block;
+    background: #1e40af;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  /* FAQ CONTENT */
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    background: #222;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 0 15px;
+  }
+  .faq-content.open {
+    max-height: 3500px;
+    padding: 20px 15px;
+  }
+  .faq-item {
+    margin-bottom: 18px; /* espaçamento reduzido para ficar mais compacto */
+    line-height: 1.5;
+  }
+  .faq-item:last-child {
+    margin-bottom: 0;
+  }
+  .faq-item strong {
+    color: #93c5fd;
+    display: block;
+    margin-bottom: 6px; /* só um espaço entre pergunta e resposta */
+    font-size: 15px;
+  }
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid #222;
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+
+<!-- SCHEMA MARKUP GLOBAL -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Onde fica o Residencial Jardins do Cerrado em Goiânia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Localizado na região do Jardins do Cerrado 6, em Goiânia-GO, uma área em rápido desenvolvimento com boa infraestrutura, próximo a comércios e vias de acesso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto é o condomínio no Jardins do Cerrado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aproximadamente R$ 145 por mês, um dos mais baixos da região."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apartamento no Jardins do Cerrado tem quantos quartos e área?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2 quartos, 54 m² de área útil e 1 vaga de garagem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "É possível financiar apartamento no Jardins do Cerrado com FGTS ou Minha Casa Minha Vida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, aceita financiamento bancário, FGTS e enquadramento no programa Minha Casa Minha Vida, dependendo da renda familiar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O condomínio Jardins do Cerrado tem área de lazer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, conta com piscina, salão de festas, playground, quadra esportiva e áreas verdes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O apartamento no Jardins do Cerrado está pronto para morar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, entregue e em excelentes condições de conservação."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual a entrada mínima para comprar apartamento no Jardins do Cerrado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Geralmente a partir de 10-20% do valor, dependendo do banco e uso de FGTS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Há comércio perto do Jardins do Cerrado em Goiânia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, supermercados, farmácias, escolas e academias nas proximidades."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O Jardins do Cerrado aceita pets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, animais de pequeno e médio porte são permitidos conforme regulamento."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como agendar visita ao apartamento no Jardins do Cerrado?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entre em contato pelo WhatsApp ou pelo link do anúncio no Facebook Marketplace."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Onde fica o Condomínio Madison em Campo Largo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No bairro Bom Jesus, Campo Largo-PR, próximo ao centro e com acesso fácil à BR-277, a apenas 30 km de Curitiba."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto custa o condomínio no Madison Campo Largo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aproximadamente R$ 300 por mês."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apartamento no Condomínio Madison tem lazer completo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, piscina, academia, salão de festas, churrasqueira, quadra esportiva, cinema e portaria 24h."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pode usar FGTS para comprar apartamento no Madison?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, aceita FGTS e financiamento pelos principais bancos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O Condomínio Madison aceita animais?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, pets são permitidos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Onde fica o Total Ville Paraíso em Valparaíso de Goiás?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No bairro Cidade Jardins, Valparaíso de Goiás-GO, próximo à BR-040 e ao Entorno do Distrito Federal, a cerca de 40 minutos de Brasília."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto é o condomínio no Total Ville Valparaíso?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "R$ 230 por mês."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apartamento no Total Ville aceita financiamento Minha Casa Minha Vida?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, pela Caixa e outros bancos, com possibilidade de uso de FGTS e subsídios."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O Total Ville tem área de lazer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, piscina, quadra poliesportiva, playground, churrasqueira e segurança."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Total Ville Paraíso aceita pets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, animais de pequeno porte são permitidos."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-content" style="padding: 10px 12px 10px 10px;">
+    <div class="logo">
+      <div class="logo-box">
+        <div class="edificio"></div>
+        <div class="janela1"></div>
+        <div class="janela2"></div>
+      </div>
+      <div>
+        <div style="font-size: 22px; font-weight: bold; color: #fff;">IMÓVEIS DIRETO</div>
+        <div style="font-size: 12px; color: #777;">Facebook Marketplace</div>
+      </div>
+    </div>
+    <div class="social-icons">
+      <a href="https://wa.me/5561996806397" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"/>
+      </a>
+      <a href="https://www.facebook.com/marketplace/profile/100000383443041/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"/>
+      </a>
+      <a href="https://www.instagram.com/tiagoalvarezvaz/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram"/>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- GRADE DE IMÓVEIS -->
+<div class="grid-imoveis">
+  <!-- IMÓVEL 1 - Jardins do Cerrado -->
+  <div class="imovel">
+    <a href="https://www.facebook.com/marketplace/item/1212797924001795" target="_blank" style="display:block; position:relative;">
+      <img src="https://img.olx.com.br/images/36/369561337804844.webp" alt="Apartamento Jardins do Cerrado Goiânia"/>
+      <div class="imovel-preco">R$ 143.000</div>
+    </a>
+    <div class="imovel-info">
+      <div style="font-size: 16px; font-weight: bold; color: #fff;">Jardins do Cerrado</div>
+      <div style="font-size: 13px; color: #bbb;">📍 Goiânia - GO</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color:#ccc; margin:10px 0;">
+        <div>📐 54m²</div>
+        <div>🛏️ 2 quartos</div>
+        <div>🚗 1 vaga</div>
+      </div>
+      <div style="color: #fff; font-size: 13px;">Condomínio: R$ 145/mês</div>
+      <a href="https://www.facebook.com/marketplace/item/1212797924001795" target="_blank" class="btn-facebook">Ver anúncio no Facebook</a>
+
+      <div class="btn-faq" data-title="Jardins do Cerrado" onclick="toggleFaq(this)">
+        Dúvidas frequentes sobre Jardins do Cerrado
+      </div>
+      <div class="faq-content">
+        <div class="faq-item"><strong>Onde fica o Residencial Jardins do Cerrado em Goiânia?</strong>Localizado na região do Jardins do Cerrado 6, em Goiânia-GO, uma área em rápido desenvolvimento com boa infraestrutura, próximo a comércios e vias de acesso.</div>
+        <div class="faq-item"><strong>Quanto é o condomínio no Jardins do Cerrado?</strong>Aproximadamente R$ 145 por mês, um dos mais baixos da região.</div>
+        <div class="faq-item"><strong>Apartamento no Jardins do Cerrado tem quantos quartos e área?</strong>2 quartos, 54 m² de área útil e 1 vaga de garagem.</div>
+        <div class="faq-item"><strong>É possível financiar apartamento no Jardins do Cerrado com FGTS ou Minha Casa Minha Vida?</strong>Sim, aceita financiamento bancário, FGTS e enquadramento no programa Minha Casa Minha Vida, dependendo da renda familiar.</div>
+        <div class="faq-item"><strong>O condomínio Jardins do Cerrado tem área de lazer?</strong>Sim, conta com piscina, salão de festas, playground, quadra esportiva e áreas verdes.</div>
+        <div class="faq-item"><strong>O apartamento no Jardins do Cerrado está pronto para morar?</strong>Sim, entregue e em excelentes condições de conservação.</div>
+        <div class="faq-item"><strong>Qual a entrada mínima para comprar apartamento no Jardins do Cerrado?</strong>Geralmente a partir de 10-20% do valor, dependendo do banco e uso de FGTS.</div>
+        <div class="faq-item"><strong>Há comércio perto do Jardins do Cerrado em Goiânia?</strong>Sim, supermercados, farmácias, escolas e academias nas proximidades.</div>
+        <div class="faq-item"><strong>O Jardins do Cerrado aceita pets?</strong>Sim, animais de pequeno e médio porte são permitidos conforme regulamento.</div>
+        <div class="faq-item"><strong>Como agendar visita ao apartamento no Jardins do Cerrado?</strong>Entre em contato pelo WhatsApp ou pelo link do anúncio no Facebook Marketplace.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMÓVEL 2 - Condomínio Madison -->
+  <div class="imovel">
+    <a href="https://www.facebook.com/marketplace/item/1186548493334459" target="_blank" style="display:block; position:relative;">
+      <img src="https://img.olx.com.br/images/67/673567359220238.webp" alt="Apartamento Condomínio Madison Campo Largo"/>
+      <div class="imovel-preco">R$ 161.000</div>
+    </a>
+    <div class="imovel-info">
+      <div style="font-size: 16px; font-weight: bold; color: #fff;">Condomínio Madison</div>
+      <div style="font-size: 13px; color: #bbb;">📍 Campo Largo - PR</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color:#ccc; margin:10px 0;">
+        <div>📐 43m²</div>
+        <div>🛏️ 2 quartos</div>
+        <div>🚗 1 vaga</div>
+      </div>
+      <div style="color: #fff; font-size: 13px;">Condomínio: R$ 300/mês</div>
+      <a href="https://www.facebook.com/marketplace/item/1186548493334459" target="_blank" class="btn-facebook">Ver anúncio no Facebook</a>
+
+      <div class="btn-faq" data-title="Condomínio Madison" onclick="toggleFaq(this)">
+        Dúvidas frequentes sobre Condomínio Madison
+      </div>
+      <div class="faq-content">
+        <div class="faq-item"><strong>Onde fica o Condomínio Madison em Campo Largo?</strong>No bairro Bom Jesus, Campo Largo-PR, próximo ao centro e com acesso fácil à BR-277, a apenas 30 km de Curitiba.</div>
+        <div class="faq-item"><strong>Quanto custa o condomínio no Madison Campo Largo?</strong>Aproximadamente R$ 300 por mês.</div>
+        <div class="faq-item"><strong>Apartamento no Condomínio Madison tem quantos quartos?</strong>2 quartos, 43 m² e 1 vaga de garagem coberta.</div>
+        <div class="faq-item"><strong>Apartamento no Condomínio Madison tem lazer completo?</strong>Sim, piscina, academia, salão de festas, churrasqueira, quadra esportiva, cinema e portaria 24h.</div>
+        <div class="faq-item"><strong>Pode usar FGTS para comprar apartamento no Madison?</strong>Sim, aceita FGTS e financiamento pelos principais bancos.</div>
+        <div class="faq-item"><strong>O apartamento está em qual andar no Madison?</strong>Andar intermediário, com boa ventilação e vista.</div>
+        <div class="faq-item"><strong>Há portaria 24 horas no Condomínio Madison?</strong>Sim, com controle de acesso.</div>
+        <div class="faq-item"><strong>Qual a distância de Curitiba para o Condomínio Madison?</strong>Apenas 30 km, ideal para quem trabalha na capital.</div>
+        <div class="faq-item"><strong>O Condomínio Madison aceita animais?</strong>Sim, pets são permitidos.</div>
+        <div class="faq-item"><strong>Como marcar visita ao apartamento no Madison?</strong>Clique no anúncio ou envie mensagem pelo WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMÓVEL 3 - Total Ville Paraíso -->
+  <div class="imovel">
+    <a href="https://www.facebook.com/marketplace/item/1529845964751383" target="_blank" style="display:block; position:relative;">
+      <img src="https://img.olx.com.br/images/19/195537351666974.webp" alt="Apartamento Total Ville Paraíso Valparaíso"/>
+      <div class="imovel-preco">R$ 138.000</div>
+    </a>
+    <div class="imovel-info">
+      <div style="font-size: 16px; font-weight: bold; color: #fff;">Total Ville Paraíso</div>
+      <div style="font-size: 13px; color: #bbb;">📍 Valparaíso de Goiás - GO</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color:#ccc; margin:10px 0;">
+        <div>📐 51m²</div>
+        <div>🛏️ 2 quartos</div>
+        <div>🚗 1 vaga</div>
+      </div>
+      <div style="color: #fff; font-size: 13px;">Condomínio: R$ 230/mês</div>
+      <a href="https://www.facebook.com/marketplace/item/1529845964751383" target="_blank" class="btn-facebook">Ver anúncio no Facebook</a>
+
+      <div class="btn-faq" data-title="Total Ville Paraíso" onclick="toggleFaq(this)">
+        Dúvidas frequentes sobre Total Ville Paraíso
+      </div>
+      <div class="faq-content">
+        <div class="faq-item"><strong>Onde fica o Total Ville Paraíso em Valparaíso de Goiás?</strong>No bairro Cidade Jardins, Valparaíso de Goiás-GO, próximo à BR-040 e ao Entorno do Distrito Federal, a cerca de 40 minutos de Brasília.</div>
+        <div class="faq-item"><strong>Quanto é o condomínio no Total Ville Valparaíso?</strong>R$ 230 por mês.</div>
+        <div class="faq-item"><strong>Apartamento no Total Ville tem quantos quartos?</strong>2 quartos, 51 m² e 1 vaga de garagem.</div>
+        <div class="faq-item"><strong>O Total Ville tem área de lazer?</strong>Sim, piscina, quadra poliesportiva, playground, churrasqueira e segurança.</div>
+        <div class="faq-item"><strong>Apartamento no Total Ville aceita financiamento Minha Casa Minha Vida?</strong>Sim, pela Caixa e outros bancos, com possibilidade de uso de FGTS e subsídios.</div>
+        <div class="faq-item"><strong>O apartamento no Total Ville está pronto?</strong>Sim, entregue e em excelente estado.</div>
+        <div class="faq-item"><strong>Há segurança no condomínio Total Ville?</strong>Sim, portaria e monitoramento.</div>
+        <div class="faq-item"><strong>Qual a distância de Brasília para o Total Ville Paraíso?</strong>Aproximadamente 40 minutos do centro.</div>
+        <div class="faq-item"><strong>Total Ville Paraíso aceita pets?</strong>Sim, animais de pequeno porte são permitidos.</div>
+        <div class="faq-item"><strong>Como agendar visita ao Total Ville?</strong>Pelo link do anúncio ou WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMÓVEL 4 - Total Ville 2º Andar -->
+  <div class="imovel">
+    <a href="https://www.facebook.com/marketplace/item/1348414886752775" target="_blank" style="display:block; position:relative;">
+      <img src="https://img.olx.com.br/images/47/479537717838456.webp" alt="Apartamento Total Ville 2º Andar Valparaíso"/>
+      <div class="imovel-preco">R$ 137.000</div>
+    </a>
+    <div class="imovel-info">
+      <div style="font-size: 16px; font-weight: bold; color: #fff;">Total Ville 2º Andar</div>
+      <div style="font-size: 13px; color: #bbb;">📍 Valparaíso de Goiás - GO</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color:#ccc; margin:10px 0;">
+        <div>📐 43m²</div>
+        <div>🛏️ 2 quartos</div>
+        <div>🚗 1 vaga</div>
+      </div>
+      <div style="color: #fff; font-size: 13px;">Condomínio: R$ 230/mês</div>
+      <a href="https://www.facebook.com/marketplace/item/1348414886752775" target="_blank" class="btn-facebook">Ver anúncio no Facebook</a>
+
+      <div class="btn-faq" data-title="Total Ville (2º andar)" onclick="toggleFaq(this)">
+        Dúvidas frequentes sobre Total Ville (2º andar)
+      </div>
+      <div class="faq-content">
+        <div class="faq-item"><strong>Em qual andar fica este apartamento no Total Ville?</strong>2º andar, com acesso fácil por escadas ou elevador.</div>
+        <div class="faq-item"><strong>Quanto é o condomínio no Total Ville?</strong>R$ 230 mensais.</div>
+        <div class="faq-item"><strong>Apartamento no Total Ville tem quantos quartos?</strong>2 quartos, 43 m² e 1 vaga de garagem.</div>
+        <div class="faq-item"><strong>O condomínio Total Ville possui lazer?</strong>Sim, piscina, churrasqueira, área infantil e quadra.</div>
+        <div class="faq-item"><strong>Pode financiar apartamento no Total Ville com FGTS?</strong>Sim, aceita financiamento bancário e FGTS.</div>
+        <div class="faq-item"><strong>O apartamento no Total Ville está em bom estado?</strong>Sim, bem conservado e pronto para morar.</div>
+        <div class="faq-item"><strong>Há elevador no condomínio Total Ville?</strong>Sim, facilitando o acesso.</div>
+        <div class="faq-item"><strong>Qual a localização do Total Ville em Valparaíso?</strong>Próximo a comércios, escolas e BR-040.</div>
+        <div class="faq-item"><strong>Total Ville aceita animais de estimação?</strong>Sim, pets são permitidos.</div>
+        <div class="faq-item"><strong>Como visitar o apartamento no Total Ville?</strong>Clique no anúncio ou contate pelo WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 — Imóveis Direto • Anúncios no Facebook Marketplace
+</div>
+
+<script>
+  function toggleFaq(button) {
+    const content = button.nextElementSibling;
+    const originalText = button.getAttribute('data-title');
+    const fullText = 'Dúvidas frequentes sobre ' + originalText;
+    const hideText = 'Ocultar dúvidas frequentes sobre ' + originalText;
+
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      button.textContent = fullText;
+    } else {
+      content.classList.add('open');
+      button.textContent = hideText;
+    }
+  }
+</script>
+</body>
+</html>
